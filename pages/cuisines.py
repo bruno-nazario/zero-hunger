@@ -6,10 +6,12 @@ import utilities.cuisine_answers as cdt
 def make_sidebar(df):
     st.sidebar.markdown("## Filters")
 
+    country_list = ["All"] +  df.loc[:, "country"].unique().tolist()
+
     countries = st.sidebar.multiselect(
         "Choose the countries you want to view the information",
-        df.loc[:, "country"].unique().tolist(),
-        default=["Brazil"],
+        country_list,
+        default=["All"],
     )
 
     top_n = st.sidebar.slider(
@@ -23,8 +25,11 @@ def make_sidebar(df):
             "Brazilian",
         ],
     )
-
-    return list(countries), top_n, list(cuisines)
+    
+    if "All" in countries:
+        return df['country'].unique().tolist(), top_n, list(cuisines)
+    else:
+        return countries, top_n, list(cuisines)
 
 def main():
     st.set_page_config(page_title="Cuisines", page_icon="📌", layout="wide")

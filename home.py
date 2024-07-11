@@ -7,7 +7,7 @@ from streamlit_folium import folium_static
 from utilities import general_functions as gf
 
 def create_sidebar(df):
-    image = Image.open("./img/logo.png")
+    image = Image.open("logo.png")
 
     col1, col2 = st.sidebar.columns([1, 3])
     col1.image(image, width=65)
@@ -15,16 +15,18 @@ def create_sidebar(df):
 
     st.sidebar.markdown("## Filters")
 
+    country_list = ["All"] + df['country'].unique().tolist()
+
     countries = st.sidebar.multiselect(
         "Choose the countries where you want to view the restaurants",
-        df['country'].unique().tolist(),
-        default=["Brazil"],
+        country_list,
+        default=["All"],
     )
 
     st.sidebar.markdown("### Processed Data")
 
     try:
-        processed_data = pd.read_csv("./data/processed_data.csv")
+        processed_data = pd.read_csv("processed_data.csv")
         st.sidebar.download_button(
             label="Download",
             data=processed_data.to_csv(index=False),
@@ -33,7 +35,10 @@ def create_sidebar(df):
     except FileNotFoundError:
         st.sidebar.error("File processed_data.csv was not found.")
 
-    return list(countries)
+    if "All" in countries:
+        return df['country'].unique().tolist()
+    else:
+        return countries
 
 def create_map(dataframe):
     fig = folium.Figure(width=1920, height=1080)
@@ -67,7 +72,7 @@ def create_map(dataframe):
     folium_static(map, width=1024, height=768)
 
 def main():
-    df = gf.read_process_data("./data/zomato.csv")
+    df = gf.read_process_data("zomato.csv")
     st.set_page_config(page_title="Home", page_icon="📌", layout="wide")
 
     selected_countries = create_sidebar(df)
@@ -109,5 +114,6 @@ def main():
 
     selected_df = df.loc[df["country"].isin(selected_countries), :]
     create_map(selected_df)
+    
 if __name__ == "__main__":
     main()

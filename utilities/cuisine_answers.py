@@ -5,7 +5,7 @@ import streamlit as st
 
 
 def read_processed_data():
-    return pd.read_csv("./data/processed_data.csv")
+    return pd.read_csv("processed_data.csv")
 
 def top_cuisines():
     df = read_processed_data()

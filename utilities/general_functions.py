@@ -77,12 +77,9 @@ def read_process_data(file_path):
 
     df = df.drop_duplicates()
 
-    output_dir = "./data"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
 
     try:
-        df.to_csv(os.path.join(output_dir, "processed_data.csv"), index=False)
+        df.to_csv(os.path.join("processed_data.csv"), index=False)
         print("Data was saved")
     except Exception as e:
         print(f"Error{e}")
