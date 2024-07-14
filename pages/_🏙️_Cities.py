@@ -18,7 +18,7 @@ def make_sidebar(df):
         return countries
 
 def main():
-    st.set_page_config(page_title="Cities", page_icon="📌", layout="wide")
+    st.set_page_config(page_title="Cities", page_icon="🏙️", layout="wide")
 
     df = ca.read_processed_data()
 

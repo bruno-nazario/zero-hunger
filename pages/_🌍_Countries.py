@@ -21,7 +21,7 @@ def make_sidebar(df):
 
 
 def main():
-    st.set_page_config(page_title="Countries", page_icon="📌", layout="wide")
+    st.set_page_config(page_title="Countries", page_icon="🌍", layout="wide")
 
     df = coa.read_processed_data()
 

@@ -3,7 +3,7 @@ import plotly.express as px
 import streamlit as st
 
 def read_processed_data():
-    return pd.read_csv("processed_data.csv")
+    return pd.read_csv("./data/processed_data.csv")
 
 def create_bar_chart(df, x_col, y_col, title, x_label, y_label, text_auto=".2f", color = None, color_map = None):
     fig = px.bar(

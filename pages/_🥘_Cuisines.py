@@ -18,21 +18,24 @@ def make_sidebar(df):
         "Select the number of restaurants to display", 1, 20, 10
     )
 
+    cuisine_list = ["All"] + df.loc[:, "cuisines"].unique().tolist()
+
     cuisines = st.sidebar.multiselect(
         "Choose the cuisine types",
-        df.loc[:, "cuisines"].unique().tolist(),
-        default=[
-            "Brazilian",
-        ],
+        cuisine_list,
+        default=["All"],
     )
     
     if "All" in countries:
-        return df['country'].unique().tolist(), top_n, list(cuisines)
+        if "All" in cuisines:
+            return df['country'].unique().tolist(), top_n, df['cuisines'].unique().tolist()
+        else:
+            return df['country'].unique().tolist(), top_n, list(cuisines)  
     else:
         return countries, top_n, list(cuisines)
 
 def main():
-    st.set_page_config(page_title="Cuisines", page_icon="📌", layout="wide")
+    st.set_page_config(page_title="Cuisines", page_icon="🥘", layout="wide")
 
     df = cdt.read_processed_data()
 

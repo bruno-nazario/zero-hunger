@@ -7,7 +7,7 @@ from streamlit_folium import folium_static
 from utilities import general_functions as gf
 
 def create_sidebar(df):
-    image = Image.open("logo.png")
+    image = Image.open("./img/logo.png")
 
     col1, col2 = st.sidebar.columns([1, 3])
     col1.image(image, width=65)
@@ -26,7 +26,7 @@ def create_sidebar(df):
     st.sidebar.markdown("### Processed Data")
 
     try:
-        processed_data = pd.read_csv("processed_data.csv")
+        processed_data = pd.read_csv("./data/processed_data.csv")
         st.sidebar.download_button(
             label="Download",
             data=processed_data.to_csv(index=False),
@@ -72,8 +72,8 @@ def create_map(dataframe):
     folium_static(map, width=1024, height=768)
 
 def main():
-    df = gf.read_process_data("zomato.csv")
-    st.set_page_config(page_title="Home", page_icon="📌", layout="wide")
+    df = gf.read_process_data("./data/zomato.csv")
+    st.set_page_config(page_title="Home", page_icon=":chart:", layout="wide")
 
     selected_countries = create_sidebar(df)
 
