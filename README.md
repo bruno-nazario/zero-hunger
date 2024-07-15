@@ -114,7 +114,7 @@ To address these questions, a management dashboard was built to monitor the comp
 - India has the highest number of registered restaurants, with more than half of the total restaurants.
 
 # Final Project Product
-The final product is a dashboard hosted on Streamlit Cloud, accessible from any internet-connected device. The link to the dashboard is: https://bruno-nazario-zero-hunger.streamlit.app/cities.
+The final product is a dashboard hosted on Streamlit Cloud, accessible from any internet-connected device. The link to the dashboard is: https://bruno-nazario-zero-hunger.streamlit.app
 
 # Conclusion
 The goal of this project is to create data visualizations that display metrics in the best way for the company’s CEO to make data-driven decisions.
